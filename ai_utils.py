@@ -33,10 +33,13 @@ class Question(BaseModel):
     hint: Optional[str] = None
 
 
+from typing import ClassVar
+
+
 class Quest(BaseModel):
     quest_name: str
     quest_description: str
-    quests = List[Question]
+    quests: List[Question]  # Correct the annotation here
 
 
 class ExampleBehavior(BaseModel):
@@ -46,6 +49,7 @@ class ExampleBehavior(BaseModel):
     reflection: Optional[str] = None
     bonus: Optional[str] = None
 
+
 class TeacherPersona(BaseModel):
     name: str
     personality: str
@@ -53,12 +57,14 @@ class TeacherPersona(BaseModel):
     signature_trait: str
     example_behavior: ExampleBehavior
 
+
 class TeacherPersonas(BaseModel):
     teacher1: TeacherPersona
     teacher2: TeacherPersona
     teacher3: TeacherPersona
     teacher4: TeacherPersona
     teacher5: TeacherPersona
+
 
 sample_teacher_personas = {
     "teacher1": {
@@ -146,6 +152,7 @@ def get_chapters(
         Chapters,
     )
 
+
 def create_teacher_persona(topic, user_details):
     prompt = f"""You are creating a teacher persona for a teacher who is going to teach {topic} to a student.
     The teacher persona should be engaging and fun for the student. Each persona should have a unique personality, teaching style, and signature trait.
@@ -159,6 +166,7 @@ def create_teacher_persona(topic, user_details):
         ],
         TeacherPersonas,
     )
+
 
 def get_teacher_persona(teacher_name, teacher_personas=sample_teacher_personas):
     dict_details = teacher_personas[teacher_name]
@@ -191,7 +199,7 @@ There should be enough and more questions to help the student obtain the maximum
 Please tailor the questions according to the student's details:
 {user_details}
 """
-    
+
     return gpt(
         [
             {"role": "user", "content": prompt},
