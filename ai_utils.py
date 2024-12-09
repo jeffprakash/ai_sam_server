@@ -27,7 +27,7 @@ class Question(BaseModel):
     question: str
     answer: str
     points: int
-    input_type: Literal["text", "multiple_choice", "true_false", "fill_in_the_blank", "short_answer"]
+    input_type: Literal["text", "multiple_choice", "true_false", "fill_in_the_blank", "short_answer", "code"]
     options: Optional[List[str]] = None
     difficulty: Literal["easy", "medium", "hard"]
     hint: Optional[str] = None
@@ -39,7 +39,28 @@ class Quest(BaseModel):
     quests = List[Question]
 
 
-teacher_personas = {
+class ExampleBehavior(BaseModel):
+    introduction: str
+    reward_system: Optional[str] = None
+    challenge: Optional[str] = None
+    reflection: Optional[str] = None
+    bonus: Optional[str] = None
+
+class TeacherPersona(BaseModel):
+    name: str
+    personality: str
+    teaching_style: str
+    signature_trait: str
+    example_behavior: ExampleBehavior
+
+class TeacherPersonas(BaseModel):
+    teacher1: TeacherPersona
+    teacher2: TeacherPersona
+    teacher3: TeacherPersona
+    teacher4: TeacherPersona
+    teacher5: TeacherPersona
+
+sample_teacher_personas = {
     "teacher1": {
         "name": "The Gamemaster Guide",
         "personality": "Enthusiastic, adventurous, and thrives on creating immersive experiences.",
@@ -125,8 +146,21 @@ def get_chapters(
         Chapters,
     )
 
+def create_teacher_persona(topic, user_details):
+    prompt = f"""You are creating a teacher persona for a teacher who is going to teach {topic} to a student.
+    The teacher persona should be engaging and fun for the student. Each persona should have a unique personality, teaching style, and signature trait.
+    The details of the students are as follows:
+    {user_details}
+    Please tailor the teacher persona according to the student's details.
+    """
+    return gpt(
+        [
+            {"role": "user", "content": prompt},
+        ],
+        TeacherPersonas,
+    )
 
-def get_teacher_persona(teacher_name):
+def get_teacher_persona(teacher_name, teacher_personas=sample_teacher_personas):
     dict_details = teacher_personas[teacher_name]
 
     str_details = f"""Teacher Name: {dict_details['name']}
