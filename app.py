@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Body
-from ai_utils import get_chapters, create_teacher_persona, get_teacher_persona, create_quests
+from ai_utils import chat_with_teacher, get_chapters, create_teacher_persona, get_teacher_persona, create_quests
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -68,6 +68,27 @@ def quests_endpoint(
     return create_quests(
         topic,
         teacher_name,
+        chapter_name,
+        level,
+        user_details
+        or "The student has ADHD and has a hard time focusing. They are 14 years old and are interested in video games.",
+    )
+
+
+@app.get("/chat_with_teacher")
+def chat_with_teacher_endpoint(
+    teacher_name: str = Body(...),
+    topic: str = Body(...),
+    chapter_name: str = Body(...),
+    level: int = Body(...),
+    user_details: str = Body(None),
+):
+    """
+    Endpoint to chat with a teacher persona about a specific chapter and level.
+    """
+    return chat_with_teacher(
+        teacher_name,
+        topic,
         chapter_name,
         level,
         user_details
