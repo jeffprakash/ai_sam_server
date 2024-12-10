@@ -244,5 +244,3 @@ def chat_with_teacher(
     return completion.choices[0].message
 
 
-get_chapters("math")
-create_teacher_persona("math")
