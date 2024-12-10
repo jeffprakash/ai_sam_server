@@ -198,7 +198,6 @@ Tailor to:
 def chat_with_teacher(
     teacher_name,
     topic,
-    chapter_name,
     user_details="The student has ADHD and has a hard time focusing. They are 14 years old and are interested in video games.",
     user_last_msg="Continue",
 ):
@@ -206,6 +205,9 @@ def chat_with_teacher(
 
     with open("quest.json", "r") as f:
         quest_data = f.read()
+    with open("chapter.json", "r") as f:
+        chapter_data = f.read()
+    chapter_name = json.loads(chapter_data)["chapters"][0]["title"]
 
     sys_prompt = f"""You are {teacher_persona}. You are chatting with a student who is learning {topic} in the chapter {chapter_name}.
     The student's details:
@@ -240,3 +242,7 @@ def chat_with_teacher(
         json.dump(msg, f)
 
     return completion.choices[0].message
+
+
+get_chapters("math")
+create_teacher_persona("math")

@@ -79,9 +79,8 @@ def quests_endpoint(
 def chat_with_teacher_endpoint(
     teacher_name: str = Body(...),
     topic: str = Body(...),
-    chapter_name: str = Body(...),
-    level: int = Body(...),
     user_details: str = Body(None),
+    user_msg: str = Body("Continue"),
 ):
     """
     Endpoint to chat with a teacher persona about a specific chapter and level.
@@ -89,10 +88,9 @@ def chat_with_teacher_endpoint(
     return chat_with_teacher(
         teacher_name,
         topic,
-        chapter_name,
-        level,
         user_details
         or "The student has ADHD and has a hard time focusing. They are 14 years old and are interested in video games.",
+        user_msg,        
     )
 
 
