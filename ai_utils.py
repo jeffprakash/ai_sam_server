@@ -124,16 +124,13 @@ sample_teacher_personas = {
 
 
 def gpt(msg, model):
-
     completion = client.beta.chat.completions.parse(
         model="gpt-4o-2024-08-06",
         messages=msg,
         response_format=model,
     )
-    print(type(completion.choices[0].message.parsed.model_dump_json(indent=4)))
-
     response_data = completion.choices[0].message.parsed.model_dump_json(indent=4)
-    parsed_data = json.loads(response_data)  # Convert JSON string to a dictionary
+    parsed_data = json.loads(response_data)
     return JSONResponse(content=parsed_data)
 
 
@@ -141,51 +138,38 @@ def get_chapters(
     topic,
     user_details="The student has ADHD and has a hard time focusing. They are 14 years old and are interested in video games.",
 ):
-    
-
     prompt = f"""You are an expert compassionate teacher whose goal is to teach {topic} to a student as a game. 
     You have divided the topic into some small chapters. 
-    Please make it such that each chapter is engaging and fun for the students.
-    Each chapter is going to be a level in the game, so make sure that the students learn something new in each level and are excited to move to the next level.
-    Levels should be progressive and build on top of each other.
-    The details of the students are as follows:
+    Make each chapter engaging and fun.
+    Each chapter is a level, and each level builds on the previous.
     {user_details}
-    Please tailor the chapters according to the student's details.
-        """
-
-    return gpt(
-        [
-            {"role": "user", "content": prompt},
-        ],
-        Chapters,
-    )
+    """
+    s = gpt([{"role": "user", "content": prompt}], Chapters)
+    with open("chapter.json", "w") as f:
+        f.write(json.dumps(json.loads(s.body), indent=4))
+    return s
 
 
 def create_teacher_persona(topic, user_details):
-    prompt = f"""You are creating a teacher persona for a teacher who is going to teach {topic} to a student.
-    The teacher persona should be engaging and fun for the student. Each persona should have a unique personality, teaching style, and signature trait.
-    The details of the students are as follows:
+    prompt = f"""You are creating a teacher persona for teaching {topic}.
+    The persona should be engaging, fun, and tailored to the student.
     {user_details}
-    Please tailor the teacher persona according to the student's details.
     """
-    return gpt(
-        [
-            {"role": "user", "content": prompt},
-        ],
-        TeacherPersonas,
-    )
+    s = gpt([{"role": "user", "content": prompt}], TeacherPersonas)
+    with open("teacher_persona.json", "w") as f:
+        f.write(json.dumps(json.loads(s.body), indent=4))
+    return s
 
 
 def get_teacher_persona(teacher_name, teacher_personas=sample_teacher_personas):
     dict_details = teacher_personas[teacher_name]
-
     str_details = f"""Teacher Name: {dict_details['name']}
-    Personality: {dict_details['personality']}
-    Teaching Style: {dict_details['teaching_style']}
-    Signature Trait: {dict_details['signature_trait']}
-    Example Behavior:
-        {dict_details['example_behavior']}
-    """
+Personality: {dict_details['personality']}
+Teaching Style: {dict_details['teaching_style']}
+Signature Trait: {dict_details['signature_trait']}
+Example Behavior:
+    {dict_details['example_behavior']}
+"""
     return str_details
 
 
@@ -197,20 +181,62 @@ def create_quests(
     user_details="The student has ADHD and has a hard time focusing. They are 14 years old and are interested in video games.",
 ):
     teacher_persona = get_teacher_persona(teacher_name)
-
-    prompt = f"""You are {teacher_persona}. You are creating a quest for the student to learn {chapter_name} chapter of {topic}.
-The quest needs to be engaging and fun for the student.
-The student obtain atleast {level*5 + 25} points to complete the quest.
-The student can obtain a maximum of {level*10 + 25} points.
-Please prepare questions for the quest. Each question should be related to the topic, and there should be a mix of easy, medium, and hard questions.
-There should be enough and more questions to help the student obtain the maximum points.
-Please tailor the questions according to the student's details:
+    prompt = f"""You are {teacher_persona}. Create a quest for the {chapter_name} chapter of {topic}.
+The quest is fun, with points and difficulty levels.
+Points required: {level*5 + 25}
+Max points: {level*10 + 25}
+Include various difficulty questions.
+Tailor to:
 {user_details}
 """
+    s = gpt([{"role": "user", "content": prompt}], Quest)
+    with open("quest.json", "w") as f:
+        f.write(json.dumps(json.loads(s.body), indent=4))
+    return s
 
-    return gpt(
-        [
-            {"role": "user", "content": prompt},
-        ],
-        Quest,
+
+def chat_with_teacher(
+    teacher_name,
+    topic,
+    chapter_name,
+    user_details="The student has ADHD and has a hard time focusing. They are 14 years old and are interested in video games.",
+    user_last_msg="Continue",
+):
+    teacher_persona = get_teacher_persona(teacher_name)
+
+    with open("quest.json", "r") as f:
+        quest_data = f.read()
+
+    sys_prompt = f"""You are {teacher_persona}. You are chatting with a student who is learning {topic} in the chapter {chapter_name}.
+    The student's details:
+    {user_details}
+    Ensure they learn enough to answer the questions in the quest.
+    {quest_data}
+    """
+
+    sys_msg = [{"role": "system", "content": sys_prompt}]
+    f_path = "chat_with_teacher.json"
+
+    if not os.path.exists(f_path):
+        msg = sys_msg + [{"role": "user", "content": user_last_msg}]
+        with open(f_path, "w") as f:
+            json.dump(msg, f)
+    else:
+        with open(f_path, "r") as f:
+            msg = json.load(f)
+        msg.append({"role": "user", "content": user_last_msg})
+        with open(f_path, "w") as f:
+            json.dump(msg, f)
+
+    completion = client.chat.completions.create(
+        model="gpt-4o", messages=[{"role": "user", "content": "write a haiku about ai"}]
     )
+
+    with open(f_path, "r") as f:
+        msg = json.load(f)
+    msg.append({"role": "assistant", "content": completion.choices[0].message["content"]})
+
+    with open(f_path, "w") as f:
+        json.dump(msg, f)
+
+    return completion.choices[0].message
