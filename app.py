@@ -1,9 +1,20 @@
 from fastapi import FastAPI, Body
 from ai_utils import get_chapters, create_teacher_persona, get_teacher_persona, create_quests
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
 from typing import ClassVar
+
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins. Replace with specific origins for better security.
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods.
+    allow_headers=["*"],  # Allow all headers.
+)
 
 
 @app.get("/")

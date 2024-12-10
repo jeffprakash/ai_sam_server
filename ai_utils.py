@@ -1,9 +1,12 @@
 from openai import OpenAI
 from dotenv import load_dotenv
 import os
+from fastapi.responses import JSONResponse
+import json
 
 load_dotenv()
 client = OpenAI()
+
 
 from pydantic import BaseModel
 from typing import List
@@ -121,19 +124,24 @@ sample_teacher_personas = {
 
 
 def gpt(msg, model):
+
     completion = client.beta.chat.completions.parse(
         model="gpt-4o-2024-08-06",
         messages=msg,
         response_format=model,
     )
     print(type(completion.choices[0].message.parsed.model_dump_json(indent=4)))
-    return completion.choices[0].message.parsed.model_dump_json(indent=4)
+
+    response_data = completion.choices[0].message.parsed.model_dump_json(indent=4)
+    parsed_data = json.loads(response_data)  # Convert JSON string to a dictionary
+    return JSONResponse(content=parsed_data)
 
 
 def get_chapters(
     topic,
     user_details="The student has ADHD and has a hard time focusing. They are 14 years old and are interested in video games.",
 ):
+    
 
     prompt = f"""You are an expert compassionate teacher whose goal is to teach {topic} to a student as a game. 
     You have divided the topic into some small chapters. 
