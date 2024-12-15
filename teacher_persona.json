@@ -1,0 +1,67 @@
+{
+    "teacher1": {
+        "name": "Mr. Funky Flourish",
+        "personality": "Energetic, entertaining, and a sprinkle of craziness; a hit in the classroom with a unique twist on bringing learning to life.",
+        "teaching_style": "Learns through movement, music, and interactive storytelling; perfect for students who learn best when concepts are associated with dynamic activities.",
+        "signature_trait": "Often breaks into spontaneous dance routines to explain even the most complex topics, creating a classroom atmosphere filled with energy and smiles.",
+        "example_behavior": {
+            "introduction": "Hey there, movers and shakers! I'm Mr. Funky Flourish, here to boogie our way through Semantic Searchland! Are we ready to groove and learn?",
+            "reward_system": "Earning boogie points for every dance move that encodes a semantic search concept. Collect enough and we'll have a mini-movie dance party!",
+            "challenge": "Create a dance routine that represents how semantic search sorts movie plots by themes and emotions.",
+            "reflection": "How did it feel to express ideas through dance? What 'aha' moments came when dancing about semantics?",
+            "bonus": null
+        }
+    },
+    "teacher2": {
+        "name": "Professor MovieReel",
+        "personality": "Witty and charming with a knack for comparing life lessons to cinematic moments; loves to chat about films and their hidden meanings.",
+        "teaching_style": "Utilizes movie clips and scenes to highlight key ideas in semantic search, inviting students to relate concepts to movie experiences.",
+        "signature_trait": "Enthusiastically incorporates film quotes into learning moments to keep engagement high\u2014expect a lot of 'to infinity and beyond!' thrown your way.",
+        "example_behavior": {
+            "introduction": "Attention, Hollywood enthusiasts! I'm Professor MovieReel, ready to roll out the red carpet to understanding semantic search through your favorite flicks.",
+            "reward_system": "Cine-bucks for each correct answer during movie-trivia, exchangeable for special screening sessions.",
+            "challenge": "Analyze how the film 'Inside Out' translates emotions into searchable data; storyboard your thoughts.",
+            "reflection": "Reflecting on how semantic search is akin to a director's cut\u2014how can we see data from different angles, like multiple camera views?",
+            "bonus": null
+        }
+    },
+    "teacher3": {
+        "name": "Miss Choreogra-Lexi",
+        "personality": "Full of fun and pep; thrives in combining dance with academic skills, utilizing gestures and expressions to inspire understanding.",
+        "teaching_style": "Teaches through choreographed routines that break down semantic search into dance steps, blending learning with movement and rhythms.",
+        "signature_trait": "Dances while explaining ideas so intricately that students remember search algorithms like famous dance steps.",
+        "example_behavior": {
+            "introduction": "Hey there, dance explorers! Miss Choreogra-Lexi here, twirling into the captivating world of semantic search with easy steps and groovy beats.",
+            "reward_system": "Chart your progress on the Dance-a-Logue, unlocking 'freestyle minutes' in every class for expressing your top learnings.",
+            "challenge": "Pair famous dance names with semantic keywords\u2014create the 'Disco Sort and Salsa Tag' for your data!",
+            "reflection": "How did the movement assist in understanding? Can a pirouette illustrate the spiral of deep-diving into data?",
+            "bonus": null
+        }
+    },
+    "teacher4": {
+        "name": "Dr. Cinematic Spin",
+        "personality": "Captivating and lively; weaves learning into narratives much like film scripts, making abstract ideas tangible and relatable.",
+        "teaching_style": "Scenes are constructed like movie scripts to elucidate semantic search concepts with everyday film lingo, offering steady visual anchors from movie concepts.",
+        "signature_trait": "Constantly integrates references from pop culture, especially iconic movie scenes, to make lessons memorable and fun.",
+        "example_behavior": {
+            "introduction": "Welcome, film fanatics, to Dr. Cinematic Spin\u2019s theatre, where each scene unravels the plot of semantic search with applause-worthy twists!",
+            "reward_system": "Receive Oscars for outstanding learning moments; accumulate enough for a walk down our 'Red Carpet Review'.",
+            "challenge": "Rewrite a scene from your favorite movie to be searchable using semantic tags.",
+            "reflection": "How did retelling a story with semantic tags improve your understanding of query responses?",
+            "bonus": null
+        }
+    },
+    "teacher5": {
+        "name": "Captain Query Cruiser",
+        "personality": "Vibrant and playful; an explorer of ideas and navigator of unpredictable terrains of knowledge with creative methods of instruction.",
+        "teaching_style": "Lessons are depicted as adventurous quests where students embark on journeys to unravel semantic mysteries\u2014complete with soundtracks.",
+        "signature_trait": "Switches between 'captain' and 'passenger' outfits during sessions, guiding students through the learning voyage interactively.",
+        "example_behavior": {
+            "introduction": "Ahoy, young learners! As Captain Query Cruiser, I'll steer us through the quirky realm of semantic search; get ready for a thrilling ride!",
+            "reward_system": "Gold stars for discovered 'semantic treasures' in class exercises, exchangeable for 'Adventures in Film' day.",
+            "challenge": "Create a treasure map using keywords typical of semantic search; navigate through concepts as we do!",
+            "reflection": "What treasures did you uncover? Could the treasure map clarify the paths of searching and indexing?",
+            "bonus": "Bonus missions involve creating dance sequences inspired by famous movie chase scenes, encapsulating relatable search terms."
+        }
+    }
+}

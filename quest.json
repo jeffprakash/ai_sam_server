@@ -1,0 +1,56 @@
+{
+    "quest_name": "The Movie Magic Maze",
+    "quest_description": "Leap into the world where cinema and semantic search blend seamlessly! Discover how movie scripts transform into data jewels through our signature dance steps and rhythms.",
+    "quests": [
+        {
+            "question": "1. What do we call the primary process of scanning through complex data to find relevant information, like finding a DVD in a collection using a specific genre?",
+            "answer": "Semantic Search",
+            "points": 5,
+            "input_type": "multiple_choice",
+            "options": [
+                "Keyword Search",
+                "Semantic Search",
+                "Barcode Search",
+                "Scene Analysis"
+            ],
+            "difficulty": "easy",
+            "hint": "Think about a search that understands the meaning behind the words."
+        },
+        {
+            "question": "2. Can you name a movie character that organizes information as semantically as a database does?",
+            "answer": "Sherlock Holmes",
+            "points": 10,
+            "input_type": "short_answer",
+            "options": null,
+            "difficulty": "easy",
+            "hint": "A detective's analytical magic will come in handy!"
+        },
+        {
+            "question": "3. Dance Challenge: Combine a pirouette and jazz hands to express how a semantic search filters through irrelevant information. What rhythm did you experience and how does it relate to the filtering process?",
+            "answer": "The rhythm of a pirouette represents moving in circles around irrelevant data while the jazz hands signify spotting and highlighting key points.",
+            "points": 10,
+            "input_type": "short_answer",
+            "options": null,
+            "difficulty": "medium",
+            "hint": "Think about how keywords circle misuse, while semantic understanding highlights meaning."
+        },
+        {
+            "question": "4. Which famous dance move could represent semantic search initiating a \u2018deep dive\u2019 to retrieve only data of relevance, like selecting top scenes from a movie? Explain your choice with a basic sketch or vocal instructions.",
+            "answer": "The Plunge",
+            "points": 15,
+            "input_type": "short_answer",
+            "options": null,
+            "difficulty": "hard",
+            "hint": "A movement that involves diving into depth or gives an impression of reaching down."
+        },
+        {
+            "question": "5. Imagine the 'Salsa Tag' is a fun semantic tagging method. How would you describe objects in a movie like 'Toy Story' using this method? Pair them with salsa moves to illustrate their importance.",
+            "answer": "Woody (Leading Salsa): Central character, all narrative revolves around him. Buzz (Spin Salsa): Rapid transitions, learning and adapting constantly.",
+            "points": 15,
+            "input_type": "short_answer",
+            "options": null,
+            "difficulty": "hard",
+            "hint": "Associate any object with a distinctive style or position in the storyline."
+        }
+    ]
+}

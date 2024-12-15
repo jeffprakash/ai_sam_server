@@ -162,6 +162,10 @@ def create_teacher_persona(topic, user_details):
 
 
 def get_teacher_persona(teacher_name, teacher_personas=sample_teacher_personas):
+    keys = teacher_personas.keys()
+    for key in keys:
+        if teacher_personas[key]["name"] == teacher_name:
+            teacher_name = key
     dict_details = teacher_personas[teacher_name]
     str_details = f"""Teacher Name: {dict_details['name']}
 Personality: {dict_details['personality']}
@@ -180,7 +184,11 @@ def create_quests(
     level,
     user_details="The student has ADHD and has a hard time focusing. They are 14 years old and are interested in video games.",
 ):
-    teacher_persona = get_teacher_persona(teacher_name)
+
+    with open("teacher_persona.json", "r") as f:
+        teacher_personas = f.read()
+
+    teacher_persona = get_teacher_persona(teacher_name, json.loads(teacher_personas))
     prompt = f"""You are {teacher_persona}. Create a quest for the {chapter_name} chapter of {topic}.
 The quest is fun, with points and difficulty levels.
 Points required: {level*5 + 25}
@@ -201,7 +209,10 @@ def chat_with_teacher(
     user_details="The student has ADHD and has a hard time focusing. They are 14 years old and are interested in video games.",
     user_last_msg="Continue",
 ):
-    teacher_persona = get_teacher_persona(teacher_name)
+
+    with open("teacher_persona.json", "r") as f:
+        teacher_personas = f.read()
+    teacher_persona = get_teacher_persona(teacher_name, json.loads(teacher_personas))
 
     with open("quest.json", "r") as f:
         quest_data = f.read()
@@ -209,7 +220,7 @@ def chat_with_teacher(
         chapter_data = f.read()
     chapter_name = json.loads(chapter_data)["chapters"][0]["title"]
 
-    sys_prompt = f"""You are {teacher_persona}. You are chatting with a student who is learning {topic} in the chapter {chapter_name}.
+    sys_prompt = f"""You are chatting with a student who is learning {topic} in the chapter {chapter_name}.
     The student's details:
     {user_details}
     Ensure they learn enough to answer the questions in the quest.
@@ -230,17 +241,19 @@ def chat_with_teacher(
         with open(f_path, "w") as f:
             json.dump(msg, f)
 
+    # print(msg)
     completion = client.chat.completions.create(
-        model="gpt-4o", messages=[{"role": "user", "content": "write a haiku about ai"}]
+        model="gpt-4o", messages=msg
     )
+    # print(complejtion)
 
     with open(f_path, "r") as f:
         msg = json.load(f)
-    msg.append({"role": "assistant", "content": completion.choices[0].message["content"]})
+    msg.append({"role": "assistant", "content": completion.choices[0].message.content})
 
     with open(f_path, "w") as f:
         json.dump(msg, f)
 
-    return completion.choices[0].message
+    return completion.choices[0].message.content
 
 

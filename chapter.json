@@ -1,0 +1,46 @@
+{
+    "chapters": [
+        {
+            "level": 1,
+            "title": "Welcome to the Semantic Treasure Hunt!",
+            "description": "Begin your quest in the enchanting land of Wordville! Meet your guide, Semanti, the wise owl, who will take you on a journey to uncover the secrets of semantic search.",
+            "learning_goal": "Understand the basic concept of words having multiple meanings and how context defines it."
+        },
+        {
+            "level": 2,
+            "title": "Dancing with Dictionary Dragons",
+            "description": "Put on your dancing shoes and step into the Dictionary Dungeon! Every time the music stops, a dictionary dragon challenges you to a word duel. Only by understanding exactly what the word means in the context of the sentence can you make the dragon dance away!",
+            "learning_goal": "Learn how context determines the meaning of a word by matching words to their specific meanings."
+        },
+        {
+            "level": 3,
+            "title": "The Movie Magic Maze",
+            "description": "Enter the vibrant Movie Magic Maze! Each turn reveals a scene from your favorite films. Help characters understand each other by connecting related concepts. Every correct connection lights a path forward!",
+            "learning_goal": "Explore how related concepts and synonyms enhance understanding and how connections are made in semantics."
+        },
+        {
+            "level": 4,
+            "title": "Jive with Synonym Sharks",
+            "description": "Splash into the Synonym Sea! The Synonym Sharks love a good jive. Match similar meanings to make pairs and create an underwater symphony. Beware: mismatches might summon the mighty semantic wave!",
+            "learning_goal": "Grasp how synonyms play a central role in language similarity in semantic search."
+        },
+        {
+            "level": 5,
+            "title": "The Context Conundrum",
+            "description": "Step into the mysterious Gallery of Context! Paint a picture of understanding by solving riddles that alter meaning based on surroundings. Every correct answer adds color to your masterpiece!",
+            "learning_goal": "Understand how context can change the shades of meaning in different scenarios."
+        },
+        {
+            "level": 6,
+            "title": "Dance to the Tone Tune",
+            "description": "Rythm is key! In the Musical Domain Dome, help wordbirds sing their songs in the right emotion. Choose the tones and watch the wordbirds perform the enchanting semantic symphony!",
+            "learning_goal": "Learn the impact of tone and emotional context in semantic understanding."
+        },
+        {
+            "level": 7,
+            "title": "Semantic Search Showdown",
+            "description": "It's game time! Face a formidable opponent in the Semantic Arena. Employ everything you've learned. From context and synonyms to tones and connections, use these skills to win the ultimate prize!",
+            "learning_goal": "Combine all elements learned to simulate the process of semantic search in an engaging challenge."
+        }
+    ]
+}
